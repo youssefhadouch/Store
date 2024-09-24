@@ -1,5 +1,6 @@
 package com.example.demo2.controller;
 
+import com.example.demo2.dto.OrderRequest;
 import com.example.demo2.entity.Order;
 import com.example.demo2.service.Orderservice;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +14,7 @@ import java.util.List;
 @RequestMapping("/order")
 public class OrderController {
 
-    @Autowired
+
     private final Orderservice orderservice;
 
 
@@ -36,6 +37,13 @@ public class OrderController {
     public List<Order> getAllOrders(@RequestBody Order order){
         return orderservice.getAllOrders(order);
     }
+
+
+    @PostMapping("/place-order")
+    public String requestOrder(@RequestBody OrderRequest order){
+        return orderservice.placeOrder(order);
+    }
+
 
 
 

@@ -1,5 +1,7 @@
 package com.example.demo2.service;
 
+import com.example.demo2.client.InventoryServiceClient;
+import com.example.demo2.dto.OrderRequest;
 import com.example.demo2.entity.Order;
 import com.example.demo2.entity.OrderStatus;
 import com.example.demo2.repository.OrderRepository;
@@ -13,8 +15,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderserviceImpl implements Orderservice {
 
-private final OrderRepository orderRepository;
-
+    private final OrderRepository orderRepository;
+    private final InventoryServiceClient inventoryServiceClient;
 
     @Override
     public Order createOrder(Order order) {
@@ -63,5 +65,16 @@ private final OrderRepository orderRepository;
     public List<Order> getAllOrders(Order order) {
 
         return   orderRepository.findAll();
+    }
+
+    @Override
+    public String placeOrder(OrderRequest order) {
+
+        Boolean inStock = inventoryServiceClient.InStock(order);
+
+        if (inStock)
+            return "order placed successfully";
+
+        return "order failed";
     }
 }

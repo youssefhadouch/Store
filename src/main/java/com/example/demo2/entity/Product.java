@@ -29,6 +29,8 @@ public class Product {
     @JoinColumn(name = "store_id")
     private Store store;
 
+
+    //need to be manytomany
    @ManyToOne
     private Order order;
 

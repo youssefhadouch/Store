@@ -31,8 +31,13 @@ public class Order {
     //relationships
     @ManyToOne
     private UserEntity userEntity;
+
+
+
+    // should be manytomany
     @OneToMany(mappedBy = "order")
     private List<Product> products;
+
 
 
 
